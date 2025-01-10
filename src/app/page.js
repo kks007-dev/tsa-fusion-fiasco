@@ -43,7 +43,7 @@ const HeroSection = () => {
     <div className="bg-green-50 py-20">
       <div className="container mx-auto text-center px-4">
         <h1 className="text-5xl font-extrabold text-green-900 mb-6">
-          Welcome to Fusion Fiasco
+          Welcome to <i>Fusion Fiasco</i>
         </h1>
         <h3 className="text-2xl font-bold text-green-700 mb-6">
           Where Culinary Worlds Collide
