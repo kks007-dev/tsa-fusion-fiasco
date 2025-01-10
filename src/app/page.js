@@ -13,8 +13,8 @@ const Header = () => {
         <div className="text-3xl font-bold">Fusion Fiasco</div>
         <nav className="space-x-6">
           <a href="#menu" className="hover:text-green-200">Menu</a>
-          <a href="about.js" className="hover:text-green-200">Order</a>
-          <a href="credits.js" className="hover:text-green-200">About</a>
+          <a href="about.js" className="hover:text-green-200">About</a>
+          <a href="credits.js" className="hover:text-green-200">Order</a>
         </nav>
       </div>
     </header>
