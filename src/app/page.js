@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="bg-green-800 text-white py-6">
       <div className="container mx-auto flex justify-between items-center px-4">
-        <Link href="/" className="text-3xl font-bold hover:text-green-200">
+        <Link href="/" className="text-3xl font-bold italic  hover:text-green-200">
           Fusion Fiasco
         </Link>
         <nav className="space-x-6">
@@ -43,8 +43,11 @@ const HeroSection = () => {
     <div className="bg-green-50 py-20">
       <div className="container mx-auto text-center px-4">
         <h1 className="text-5xl font-extrabold text-green-900 mb-6">
-          Where Culinary Worlds Collide
+          Welcome to Fusion Fiasco
         </h1>
+        <h3 className="text-2xl font-bold text-green-700 mb-6">
+          Where Culinary Worlds Collide
+        </h3>
         <p className="text-xl text-green-700 mb-8">
           Unexpected Flavor Journeys: Nigerian, Vietnamese, and Indian Cuisines Reimagined
         </p>
