@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Minus, Plus, X, ChevronLeft } from 'lucide-react';import AboutPage from './about/page';
 import Navbar from '@/components/ui/Navbar';
+
 
 // Updated Header Component
 const Header = () => {
@@ -297,7 +299,7 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
           )}
         </div>
       )}
-
+      
       {/* Fixed Checkout Section */}
       {isOpen && cartItems.length > 0 && (
         <div className="border-t border-green-100 p-4 bg-white">
@@ -305,9 +307,12 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
             <span>Total</span>
             <span>${total.toFixed(2)}</span>
           </div>
+          <Link href="/checkout">
           <Button className="w-full bg-green-600 hover:bg-green-700">
             Checkout
           </Button>
+          </Link>
+          
         </div>
       )}
     </div>
