@@ -1,17 +1,22 @@
 "use client";
 import Link from 'next/link';
 import { Button } from './button';
-
+import { useEffect } from 'react';
 
 const Navbar = () => {
-
   
-  let username = localStorage.getItem("name");
-  let token = localStorage.getItem("token");
-  
+  let token;
+  let username;
+    if (global?.window !== undefined){
+      token = localStorage.getItem("token");
+      username = localStorage.getItem("name");
+    };
+ 
   const signOut = () =>{
     if(confirm('Sign out?')){
       localStorage.clear();
+      setName("");
+      setToken("")
       window.location.href = '/';
     };
   };
