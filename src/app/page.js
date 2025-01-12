@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart, Minus, Plus, X } from 'lucide-react';
-import AboutPage from './about/page';
+import { ShoppingCart, Minus, Plus, X, ChevronLeft } from 'lucide-react';import AboutPage from './about/page';
 import Navbar from '@/components/ui/Navbar';
 
 // Updated Header Component
@@ -46,7 +44,7 @@ const HeroSection = () => {
     <div className="bg-green-50 py-20">
       <div className="container mx-auto text-center px-4">
         <h1 className="text-5xl font-extrabold text-green-900 mb-6">
-          Welcome to <i>Fusion Fiasco</i>
+        <i>Welcome to Fusion Fiasco</i>
         </h1>
         <h3 className="text-2xl font-bold text-green-700 mb-6">
           Where Culinary Worlds Collide
@@ -216,61 +214,101 @@ const MenuSection = ({ onAddToCart }) => {
 
 // Cart Component
 const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Auto-open cart when items are added
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setIsOpen(true);
+    }
+  }, [cartItems.length]);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-      <h2 className="text-2xl font-bold text-green-900 mb-4">Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p className="text-green-700">Your cart is empty</p>
-      ) : (
-        <>
-          {cartItems.map((item, index) => (
-            <div key={index} className="flex justify-between items-center mb-4 border-b pb-2">
-              <div className="flex items-center">
-                <div className="mr-4">
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    onClick={() => onRemoveItem(index)}
-                  >
-                    <X className="h-4 w-4 text-red-500" />
-                  </Button>
-                </div>
-                <div>
-                  <p className="font-bold text-green-900">{item.name}</p>
-                  <p className="text-green-700">${item.price.toFixed(2)}</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={() => onUpdateQuantity(index, item.quantity - 1)}
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="mx-2">{item.quantity}</span>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={() => onUpdateQuantity(index, item.quantity + 1)}
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          ))}
-          <div className="mt-4">
-            <div className="flex justify-between font-bold text-green-900">
-              <span>Total</span>
-              <span>${total.toFixed(2)}</span>
-            </div>
-            <Button className="w-full mt-4 bg-green-600 hover:bg-green-700">
-              Checkout
-            </Button>
+    <div className={`fixed right-0 top-0 h-screen transition-all duration-300 ease-in-out ${isOpen ? 'w-96' : 'w-16'} bg-white shadow-lg border-l border-green-100 flex flex-col`}>
+      {/* Cart Header */}
+      <div className="flex items-center h-20 px-4 border-b border-green-100 bg-white">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center justify-center w-full"
+        >
+          <div className="flex items-center">
+            <ShoppingCart className="h-6 w-6 text-green-600" />
+            {!isOpen && totalItems > 0 && (
+              <span className="ml-1 bg-green-600 text-white rounded-full px-2 py-1 text-xs">
+                {totalItems}
+              </span>
+            )}
+            {isOpen && (
+              <>
+                <span className="ml-2 font-bold text-green-900">Your Cart</span>
+                <ChevronLeft className={`ml-2 transform transition-transform ${isOpen ? '' : 'rotate-180'}`} />
+              </>
+            )}
           </div>
-        </>
+        </button>
+      </div>
+
+      {/* Cart Content */}
+      {isOpen && (
+        <div className="flex-1 overflow-y-auto p-4">
+          {cartItems.length === 0 ? (
+            <p className="text-green-700">Your cart is empty</p>
+          ) : (
+            <>
+              {cartItems.map((item, index) => (
+                <div key={index} className="flex justify-between items-center mb-4 border-b pb-2">
+                  <div className="flex items-center">
+                    <div className="mr-4">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={() => onRemoveItem(index)}
+                      >
+                        <X className="h-4 w-4 text-red-500" />
+                      </Button>
+                    </div>
+                    <div>
+                      <p className="font-bold text-green-900">{item.name}</p>
+                      <p className="text-green-700">${item.price.toFixed(2)}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => onUpdateQuantity(index, item.quantity - 1)}
+                    >
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="mx-2">{item.quantity}</span>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => onUpdateQuantity(index, item.quantity + 1)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Fixed Checkout Section */}
+      {isOpen && cartItems.length > 0 && (
+        <div className="border-t border-green-100 p-4 bg-white">
+          <div className="flex justify-between font-bold text-green-900 mb-4">
+            <span>Total</span>
+            <span>${total.toFixed(2)}</span>
+          </div>
+          <Button className="w-full bg-green-600 hover:bg-green-700">
+            Checkout
+          </Button>
+        </div>
       )}
     </div>
   );
@@ -306,12 +344,10 @@ const FusionFiascoWebsite = () => {
     const existingItemIndex = cartItems.findIndex(cartItem => cartItem.name === item.name);
     
     if (existingItemIndex > -1) {
-      // If item exists, increase quantity
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += 1;
       setCartItems(updatedCart);
     } else {
-      // If new item, add to cart
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
@@ -323,7 +359,6 @@ const FusionFiascoWebsite = () => {
 
   const handleUpdateQuantity = (index, newQuantity) => {
     if (newQuantity < 1) {
-      // Remove item if quantity becomes 0
       handleRemoveItem(index);
     } else {
       const updatedCart = [...cartItems];
@@ -335,20 +370,27 @@ const FusionFiascoWebsite = () => {
   return (
     <div className="min-h-screen bg-green-50">
       <Header />
-      <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
-        <div className="flex-grow">
-          <HeroSection />
-          <FeaturedFusions />
-          <MenuSection onAddToCart={handleAddToCart} />
-        </div>
-        <div className="w-full md:w-96">
-          <Cart 
-            cartItems={cartItems} 
-            onRemoveItem={handleRemoveItem}
-            onUpdateQuantity={handleUpdateQuantity}
-          />
-        </div>
+      <div className="flex">
+        {/* Main content area with dynamic margin based on cart state */}
+        <main className="flex-1" style={{ marginRight: "64px" }}>
+          <div className="max-w-7xl mx-auto px-4 py-8">
+            <HeroSection />
+            <FeaturedFusions />
+            <MenuSection onAddToCart={handleAddToCart} />
+          </div>
+        </main>
+        {/* Collapsible cart sidebar */}
+        <Cart 
+          cartItems={cartItems} 
+          onRemoveItem={handleRemoveItem}
+          onUpdateQuantity={handleUpdateQuantity}
+        />
       </div>
+      <div className="container mx-auto px-4 text-center">
+        <div className="mb-4">
+            <h3 className="text-2xl font-bold">More coming soon!</h3>
+          </div>
+          </div>
       <Footer />
     </div>
   );
