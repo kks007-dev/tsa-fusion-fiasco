@@ -1,6 +1,20 @@
+"use client";
 import Link from 'next/link';
+import { Button } from './button';
+
 
 const Navbar = () => {
+
+  
+  let username = localStorage.getItem("name");
+  let token = localStorage.getItem("token");
+  
+  const signOut = () =>{
+    if(confirm('Sign out?')){
+      localStorage.clear();
+      window.location.href = '/';
+    };
+  };
   return (
     <header className="bg-green-800 text-white py-6">
       <div className="container mx-auto flex justify-between items-center px-4">
@@ -23,6 +37,13 @@ const Navbar = () => {
           <Link href="/about" className="hover:text-green-200">
             About
           </Link>
+          {token? 
+          <Button asChild className="bg-green-500 hover:bg-green-50"><Link href="#" onClick={signOut} className="text-lg hover:text-green-500">
+            {username}
+          </Link></Button> :
+          <Button asChild className="group bg-green-500 hover:bg-green-50"><Link href="/login" className="hover:text-green-500">
+            Login
+          </Link></Button>}
         </nav>
       </div>
     </header>
