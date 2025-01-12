@@ -43,7 +43,7 @@ const Navbar = () => {
             About
           </Link>
           {token? 
-          <Button asChild className="bg-green-500 hover:bg-green-50"><Link href="#" onClick={signOut} className="text-lg hover:text-green-500">
+          <Button asChild className="bg-green-500 hover:bg-green-50"><Link href="" onClick={signOut} className="text-lg hover:text-green-500">
             {username}
           </Link></Button> :
           <Button asChild className="group bg-green-500 hover:bg-green-50"><Link href="/login" className="hover:text-green-500">
