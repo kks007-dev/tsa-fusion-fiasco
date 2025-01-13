@@ -147,7 +147,8 @@ const FoodTruckPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <PageBackground imageUrl="https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+      <PageBackground imageUrl="https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      overlayOpacity={0.1}>
       <Navbar />
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-5xl mx-auto">

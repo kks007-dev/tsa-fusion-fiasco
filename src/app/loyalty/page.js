@@ -148,11 +148,13 @@ const LoyaltyDashboard = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
-      <PageBackground imageUrl="https://images.pexels.com/photos/1415734/pexels-photo-1415734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+      <PageBackground imageUrl="https://img.freepik.com/free-photo/indian-food-circular-frame-with-copy-space_23-2148747658.jpg?t=st=1736748795~exp=1736752395~hmac=a76e64a39be61107e861affb43c3b0687d65070e05b7fd7498779f878a86b5c5&w=1380"
+      overlayOpacity={0.7}
+      >
       <Navbar />
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl font-bold text-green-900 mb-8">Loyalty Program</h1>
+          <h1 className="text-4xl font-bold text-white mb-8"><i>Loyalty Program</i></h1>
         
         {!isAuthenticated ? (
           <Card>
@@ -163,7 +165,7 @@ const LoyaltyDashboard = () => {
           </Card>
         ) : (
           <Tabs defaultValue="points" className="space-y-6">
-            <TabsList className="grid grid-cols-6 gap-4">
+            <TabsList className=" text-white grid grid-cols-6 gap-4">
               <TabsTrigger value="points">Points</TabsTrigger>
               <TabsTrigger value="rewards">Rewards</TabsTrigger>
               <TabsTrigger value="referral">Referral</TabsTrigger>

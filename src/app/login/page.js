@@ -115,7 +115,9 @@ const HomePage = () => {
 
     return (
       <div>
-        <PageBackground overlayOpacity={0.5} imageUrl="https://images.pexels.com/photos/1415734/pexels-photo-1415734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+        <PageBackground overlayOpacity={0.5} 
+        imageUrl="https://i.ibb.co/ggxfhR5/Fusion-fiasco-20250112-223548-0000.png"
+        >
         <Header />
         <main className="min-h-screen flex items-center justify-center">
           <div className="transition-all duration-300 ease-in-out bg-white shadow-lg rounded-3xl p-8 max-w-md w-full">
