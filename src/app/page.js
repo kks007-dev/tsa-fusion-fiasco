@@ -401,8 +401,10 @@ const FusionFiascoWebsite = () => {
             <h3 className="text-2xl text-green-200 font-bold">More coming soon!</h3>
           </div>
           
-          </div></PageBackground>
+          </div>
+          
       <Footer />
+      </PageBackground>
     </div>
   );
 };
