@@ -110,16 +110,22 @@ const AboutPage = () => {
             </div>
             <div className="mt-8 flex justify-center gap-4">
               <Link 
-                href="/copyright"
+                href="https://drive.google.com/file/d/1MOSWfnFV5wGWulo4OYkjdsrIR-owcn16/view?usp=sharing"
                 className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors"
               >
                 Copyright Checklist
               </Link>
               <Link 
-                href="/work-log"
+                href="https://drive.google.com/file/d/1W_lyeCUmqB5U6NUNeQ0llEWICndtsXep/view?usp=sharing"
                 className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors"
               >
                 Work Log
+              </Link>
+              <Link 
+                href="https://drive.google.com/file/d/1JCpRnQPZQ_FmmjcZPriXM5K1xA1hfJ1P/view?usp=sharing"
+                className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Cited Sources
               </Link>
             </div>
           </div>
