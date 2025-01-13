@@ -46,8 +46,8 @@ const HeroSection = () => {
   return (
     <div className=" backdrop-opacity-30 py-20 rounded-md">
       <div className="container mx-auto text-center px-4">
-        <h1 className="text-5xl font-extrabold text-green-500 mb-6">
-        <i>Welcome to Fusion Fiasco</i>
+        <h1 className="font-celina font-light text-8xl text-white mb-6">
+        Welcome to <i className=' font-normal'>Fusion Fiasco</i>
         </h1>
         <h3 className="text-2xl font-bold text-green-400 mb-6">
           Where Culinary Worlds Collide
@@ -109,7 +109,7 @@ const FeaturedFusions = () => {
     <section className="py-16 ">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-green-500 mb-12">
-          Our Unique Fusion Concepts
+          Our Unique <i className='font-celina text-6xl text-white font-light'>Fusion</i> Concepts
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {fusions.map((fusion, index) => (
@@ -199,7 +199,7 @@ const MenuSection = ({ onAddToCart }) => {
     <section id="menu" className="py-16 ">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-green-500 mb-12">
-          Our Fusion Menu
+          Our Featured <i className='font-celina text-7xl text-white font-light'>Fusion</i> Menu
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {menuItems.map((item, index) => (
@@ -375,7 +375,7 @@ const FusionFiascoWebsite = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
-      <PageBackground overlayOpacity={0.5} imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736744671~exp=1736748271~hmac=763981313efdb302acfc75c5b30b3501e4aed4455f90e56b3dd41b9cd401a6cc&w=996">
+      <PageBackground overlayOpacity={0.6} imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736744671~exp=1736748271~hmac=763981313efdb302acfc75c5b30b3501e4aed4455f90e56b3dd41b9cd401a6cc&w=996">
       <Header />
       
       <div className="flex">

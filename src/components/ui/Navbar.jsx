@@ -21,10 +21,10 @@ const Navbar = () => {
     };
   };
   return (
-    <header className="bg-green-800 text-white py-6">
+    <header className="bg-green-800 text-white">
       <div className="container mx-auto flex justify-between items-center px-10">
-        <Link href="/" className="text-3xl font-bold italic hover:text-green-200">
-          Fusion Fiasco Foods Company
+        <Link href="/" className="text-7xl font-celina hover:text-green-200">
+          Fusion Fiasco
         </Link>
         <nav className="space-x-6">
           <Link href="/order" className="hover:text-green-200">
@@ -40,7 +40,7 @@ const Navbar = () => {
             Community
           </Link>
           <Link href="/about" className="hover:text-green-200">
-            About
+            Reference Page
           </Link>
           {token? 
           <Button asChild className="bg-green-500 hover:bg-green-50"><Link href="" onClick={signOut} className="text-lg hover:text-green-500">

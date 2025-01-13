@@ -4,16 +4,15 @@ const PageBackground = ({
   imageUrl,
   overlayOpacity = 0, // Controls darkness of the overlay
   children,
-  className
 }) => {
   return (
     <div className="relative min-h-screen ">
       {/* Fixed background image */}
       <div 
-        className={"fixed inset-0 bg-cover bg-center bg-no-repeat " + className}
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat" 
         style={{ 
           backgroundImage: `url(${imageUrl})`,
-          zIndex: 0
+          zIndex: 0,
         }}
       />
       
