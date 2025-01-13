@@ -228,7 +228,7 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
   }, [cartItems.length]);
 
   return (
-    <div className={`fixed right-0 top-0 h-screen transition-all duration-300 ease-in-out ${isOpen ? 'w-96' : 'w-16'} bg-white shadow-lg border-l border-green-100 flex flex-col`}>
+    <div className={`fixed right-0 transition-all duration-300 ease-in-out ${isOpen ? 'w-96 top-0 h-screen' : 'w-16 top-50 h-16'} bg-white shadow-lg border-l border-green-100 flex flex-col`}>
       {/* Cart Header */}
       <div className="flex items-center h-20 px-4 border-b border-green-100 bg-white">
         <button

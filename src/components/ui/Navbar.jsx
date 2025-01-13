@@ -22,7 +22,7 @@ const Navbar = () => {
   };
   return (
     <header className="bg-green-800 text-white py-6">
-      <div className="container mx-auto flex justify-between items-center px">
+      <div className="container mx-auto flex justify-between items-center px-10">
         <Link href="/" className="text-3xl font-bold italic hover:text-green-200">
           Fusion Fiasco Foods Company
         </Link>
