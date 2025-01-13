@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, Minus, Plus, X, ChevronLeft } from 'lucide-react';import AboutPage from './about/page';
 import Navbar from '@/components/ui/Navbar';
+import PageBackground from '@/components/ui/pagebackground';
 
 
 // Updated Header Component
@@ -43,15 +44,15 @@ const Header = () => {
 // Hero Section Component
 const HeroSection = () => {
   return (
-    <div className="bg-green-50 py-20">
+    <div className=" backdrop-opacity-30 py-20 rounded-md">
       <div className="container mx-auto text-center px-4">
-        <h1 className="text-5xl font-extrabold text-green-900 mb-6">
+        <h1 className="text-5xl font-extrabold text-green-500 mb-6">
         <i>Welcome to Fusion Fiasco</i>
         </h1>
-        <h3 className="text-2xl font-bold text-green-700 mb-6">
+        <h3 className="text-2xl font-bold text-green-400 mb-6">
           Where Culinary Worlds Collide
         </h3>
-        <p className="text-xl text-green-700 mb-8">
+        <p className="text-xl text-green-400 mb-8">
           Unexpected Flavor Journeys: Nigerian, Vietnamese, and Indian Cuisines Reimagined
         </p>
         <a 
@@ -72,7 +73,7 @@ const CuisineFusionCard = ({ icon, title, description }) => {
       <CardHeader>
         <div className="flex items-center mb-4">
           {icon}
-          <CardTitle className="ml-4 text-green-900">{title}</CardTitle>
+          <CardTitle className="ml-4 text-green-500">{title}</CardTitle>
         </div>
       </CardHeader>
       <CardContent>
@@ -105,9 +106,9 @@ const FeaturedFusions = () => {
   ];
 
   return (
-    <section className="py-16 bg-green-100">
+    <section className="py-16 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-green-900 mb-12">
+        <h2 className="text-4xl font-bold text-center text-green-500 mb-12">
           Our Unique Fusion Concepts
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -138,7 +139,7 @@ const MenuItemCard = ({ name, description, price, imageUrl, onAddToCart }) => {
       </div>
       <CardContent className="p-4">
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-xl font-bold text-green-900">{name}</h3>
+          <h3 className="text-xl font-bold text-green-500">{name}</h3>
           <span className="text-green-700 font-semibold">${price.toFixed(2)}</span>
         </div>
         <p className="text-green-700 mb-4">{description}</p>
@@ -164,7 +165,7 @@ const MenuSection = ({ onAddToCart }) => {
     },
     {
       name: "Saigon Suya Tacos",
-      description: "Nigerian suya spiced meat in Vietnamese-style soft tacos with pickled vegetables",
+      description: "Nigerian suya spiced imitation-meat in Vietnamese-style soft tacos with pickled vegetables",
       price: 16.50,
       imageUrl: "/api/placeholder/400/300?text=Saigon+Suya+Tacos"
     },
@@ -195,9 +196,9 @@ const MenuSection = ({ onAddToCart }) => {
   ];
 
   return (
-    <section id="menu" className="py-16 bg-green-50">
+    <section id="menu" className="py-16 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-green-900 mb-12">
+        <h2 className="text-4xl font-bold text-center text-green-500 mb-12">
           Our Fusion Menu
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -244,7 +245,7 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
             )}
             {isOpen && (
               <>
-                <span className="ml-2 font-bold text-green-900">Your Cart</span>
+                <span className="ml-2 font-bold text-green-500">Your Cart</span>
                 <ChevronLeft className={`ml-2 transform transition-transform ${isOpen ? '' : 'rotate-180'}`} />
               </>
             )}
@@ -272,7 +273,7 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
                       </Button>
                     </div>
                     <div>
-                      <p className="font-bold text-green-900">{item.name}</p>
+                      <p className="font-bold text-green-500">{item.name}</p>
                       <p className="text-green-700">${item.price.toFixed(2)}</p>
                     </div>
                   </div>
@@ -303,7 +304,7 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity }) => {
       {/* Fixed Checkout Section */}
       {isOpen && cartItems.length > 0 && (
         <div className="border-t border-green-100 p-4 bg-white">
-          <div className="flex justify-between font-bold text-green-900 mb-4">
+          <div className="flex justify-between font-bold text-green-500 mb-4">
             <span>Total</span>
             <span>${total.toFixed(2)}</span>
           </div>
@@ -374,10 +375,14 @@ const FusionFiascoWebsite = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
+      <PageBackground overlayOpacity={0.5} imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736744671~exp=1736748271~hmac=763981313efdb302acfc75c5b30b3501e4aed4455f90e56b3dd41b9cd401a6cc&w=996">
       <Header />
+      
       <div className="flex">
+        
         {/* Main content area with dynamic margin based on cart state */}
         <main className="flex-1" style={{ marginRight: "64px" }}>
+          
           <div className="max-w-7xl mx-auto px-4 py-8">
             <HeroSection />
             <FeaturedFusions />
@@ -393,9 +398,10 @@ const FusionFiascoWebsite = () => {
       </div>
       <div className="container mx-auto px-4 text-center">
         <div className="mb-4">
-            <h3 className="text-2xl font-bold">More coming soon!</h3>
+            <h3 className="text-2xl text-green-200 font-bold">More coming soon!</h3>
           </div>
-          </div>
+          
+          </div></PageBackground>
       <Footer />
     </div>
   );

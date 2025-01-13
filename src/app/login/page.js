@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
+import PageBackground from "@/components/ui/pagebackground";
 
 // Updated Header Component
 const Header = () => {
@@ -114,9 +115,10 @@ const HomePage = () => {
 
     return (
       <div>
+        <PageBackground overlayOpacity={0.5} imageUrl="https://images.pexels.com/photos/1415734/pexels-photo-1415734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
         <Header />
-        <main className="min-h-screen bg-gray-100 flex items-center justify-center">
-          <div className="bg-white shadow-lg rounded-3xl p-8 max-w-md w-full">
+        <main className="min-h-screen flex items-center justify-center">
+          <div className="transition-all duration-300 ease-in-out bg-white shadow-lg rounded-3xl p-8 max-w-md w-full">
             <h1 className="text-3xl font-bold text-center mb-6">
               {isSignUp ? "Sign Up" : "Login"}
             </h1>
@@ -197,6 +199,7 @@ const HomePage = () => {
           </div>
         </main>
         <Footer />
+        </PageBackground>
       </div>
     );
   };

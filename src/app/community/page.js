@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Calendar } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Navbar from '@/components/ui/Navbar';
+import PageBackground from '@/components/ui/pagebackground';
 
 // Updated Header Component
 const Header = () => {
@@ -78,12 +79,13 @@ const HomePage = () => {
 
   return (
     <div>
+      <PageBackground overlayOpacity={0.4} imageUrl="https://img.freepik.com/free-photo/flat-lay-delicious-brazilian-food-arrangement_23-2148739218.jpg?t=st=1736746428~exp=1736750028~hmac=34c334bd1f8c318b1ba9c393e89032ebce718573c4c29c18a35b7f15eae937f6&w=996">
       <Header />
-      <main className="min-h-screen bg-gray-100">
+      <main className="min-h-screen ">
         <div className="container mx-auto py-10 px-4">
-          <h1 className="text-4xl font-bold text-center mb-8">Community</h1>
+          <h1 className="text-4xl font-bold text-center text-green-500 mb-8">Community</h1>
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-semibold mb-6 text-green-800">Upcoming Events</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-slate-50">Upcoming Events</h2>
             {events.map((event, index) => (
               <EventCard
                 key={index}
@@ -96,6 +98,7 @@ const HomePage = () => {
           </div>
         </div>
       </main>
+      </PageBackground>
     </div>
   );
 };

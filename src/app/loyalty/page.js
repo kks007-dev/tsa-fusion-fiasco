@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
 import { Trophy, Gift, Users, Vote, Calendar, QrCode } from 'lucide-react';
 import Navbar from '@/components/ui/Navbar';
 import { QRCodeCanvas } from 'qrcode.react';
+import PageBackground from '@/components/ui/pagebackground';
 
 // TODO: Import auth context/hooks from authentication system
 // import { useAuth } from '@/contexts/auth-context';
@@ -147,6 +148,7 @@ const LoyaltyDashboard = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
+      <PageBackground imageUrl="https://images.pexels.com/photos/1415734/pexels-photo-1415734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
       <Navbar />
       <div className="py-8">
         <div className="max-w-7xl mx-auto px-4">
@@ -385,6 +387,7 @@ const LoyaltyDashboard = () => {
         )}
       </div>
     </div>
+    </PageBackground>
     </div>
   );
 };

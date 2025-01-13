@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock, Phone } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
+import PageBackground from "@/components/ui/pagebackground";
 import "leaflet/dist/leaflet.css";
 import dynamic from "next/dynamic"; // For dynamic imports
 // Dynamically import Leaflet only on the client side
@@ -146,6 +147,7 @@ const FoodTruckPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <PageBackground imageUrl="https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
       <Navbar />
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-5xl mx-auto">
@@ -213,6 +215,7 @@ const FoodTruckPage = () => {
           </Card>
         </div>
       </main>
+      </PageBackground>
     </div>
   );
 };

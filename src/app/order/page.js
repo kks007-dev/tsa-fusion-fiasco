@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from '@/components/ui/Navbar';
+import PageBackground from '@/components/ui/pagebackground';
 
 // Mock data - replace with your actual data fetching logic
 const mockOrders = [
@@ -120,6 +121,7 @@ const OrdersPage = () => {
   
   return (
     <div className="min-h-screen bg-green-50">
+      <PageBackground className="bg-gradient-to-t" imageUrl="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
       <Navbar />
       <div className="max-w-3xl mx-auto py-10">
         
@@ -165,6 +167,7 @@ const OrdersPage = () => {
           </Card>
         )}
       </div>
+      </PageBackground>
     </div>
   );
 };
