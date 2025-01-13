@@ -110,7 +110,7 @@ const AboutPage = () => {
             </div>
             <div className="mt-8 flex justify-center gap-4">
               <Link 
-                href="https://drive.google.com/file/d/1MOSWfnFV5wGWulo4OYkjdsrIR-owcn16/view?usp=sharing"
+                href="https://drive.google.com/file/d/15SmYIcEkGQFfwpYCUj6M98rYV891UM7o/view?usp=sharing"
                 className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors"
               >
                 Copyright Checklist
