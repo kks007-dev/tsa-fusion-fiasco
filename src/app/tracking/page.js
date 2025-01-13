@@ -5,10 +5,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock, Phone } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import dynamic from "next/dynamic"; // For dynamic imports
+// Dynamically import Leaflet only on the client side
+const L = dynamic(() => import("leaflet").then((module) => module.default), { ssr: false });
+
+
 
 const FoodTruckPage = () => {
   const mapRef = useRef(null);
+  const markerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState('');
   
@@ -78,41 +83,66 @@ const FoodTruckPage = () => {
   }, []);
 
   useEffect(() => {
-    const customIcon = L.divIcon({
-      className: 'custom-marker',
-      html: `
-        <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white transform -translate-x-1/2 -translate-y-1/2">
-          <div class="w-2 h-2 bg-white rounded-full"></div>
-        </div>
-      `,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      popupAnchor: [0, -16]
-    });
+    if (!mapRef.current || !L) return;
 
-    const map = L.map(mapRef.current).setView([location.lat, location.lng], 15);
-    
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    const initializeMap = async () => {
+      const leaflet = await import("leaflet");
 
-    const marker = L.marker([location.lat, location.lng], { icon: customIcon })
-      .addTo(map)
-      .bindPopup(`
-        <div class="p-3">
-          <h3 class="font-bold text-lg mb-2">${location.name}</h3>
-          <p class="text-gray-600 mb-2">${location.description}</p>
-          <p class="font-medium">
-            <span class="${isOpen ? 'text-green-600' : 'text-red-600'}">
-              ${isOpen ? '● Open Now' : '○ Closed'}
-            </span>
-          </p>
-        </div>
-      `)
-      .openPopup();
+      const customIcon = leaflet.divIcon({
+        className: "custom-marker",
+        html: `
+          <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white transform -translate-x-1/2 -translate-y-1/2">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+        `,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16],
+      });
 
-    return () => map.remove();
+      const map = leaflet.map(mapRef.current).setView([location.lat, location.lng], 15);
+
+      leaflet
+        .tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        })
+        .addTo(map);
+
+      const marker = leaflet
+        .marker([location.lat, location.lng], { icon: customIcon })
+        .addTo(map);
+
+      markerRef.current = marker;
+
+      updatePopupContent(marker); // Set initial popup content
+    };
+
+    initializeMap();
+  }, [L, location]);
+
+  useEffect(() => {
+    if (markerRef.current) {
+      updatePopupContent(markerRef.current); // Update popup content when isOpen changes
+    }
   }, [isOpen]);
+
+  const updatePopupContent = (marker) => {
+    const popupContent = `
+      <div class="p-3">
+        <h3 class="font-bold text-lg mb-2">${location.name}</h3>
+        <p class="text-gray-600 mb-2">${location.description}</p>
+        <p class="font-medium">
+          <span class="${isOpen ? "text-green-600" : "text-red-600"}">
+            ${isOpen ? "● Open Now" : "○ Closed"}
+          </span>
+        </p>
+      </div>
+    `;
+    marker.unbindPopup();
+    marker.bindPopup(popupContent).openPopup();
+  };
+  
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
