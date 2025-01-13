@@ -161,37 +161,37 @@ const MenuSection = ({ onAddToCart }) => {
       name: "Lagos Curry Bomb",
       description: "Creamy Indian curry meets Nigerian jollof rice with a Vietnamese herb twist",
       price: 18.99,
-      imageUrl: "/api/placeholder/400/300?text=Lagos+Curry+Bomb"
+      imageUrl: "https://i.ibb.co/RzBXQ75/20250113-003615-0000.png"
     },
     {
       name: "Saigon Suya Tacos",
       description: "Nigerian suya spiced imitation-meat in Vietnamese-style soft tacos with pickled vegetables",
       price: 16.50,
-      imageUrl: "/api/placeholder/400/300?text=Saigon+Suya+Tacos"
+      imageUrl: "https://i.ibb.co/NC8NBqY/20250113-003615-0001.png"
     },
     {
       name: "Masala Moi Moi Rolls",
       description: "Traditional Nigerian moi moi wrapped in crispy spring roll pastry with Indian masala spices",
       price: 15.75,
-      imageUrl: "/api/placeholder/400/300?text=Masala+Moi+Moi+Rolls"
+      imageUrl: "https://i.ibb.co/2Yt5pKg/20250113-003615-0002.png"
     },
     {
       name: "Pho Egusi Fusion",
       description: "Classic Vietnamese pho broth infused with Nigerian egusi seed richness",
       price: 17.25,
-      imageUrl: "/api/placeholder/400/300?text=Pho+Egusi+Fusion"
+      imageUrl: "https://i.ibb.co/4Sm68bj/20250113-003615-0003.png"
     },
     {
       name: "Tandoori Plantain Bánh Mì",
       description: "Tandoori-spiced plantains in a Vietnamese bánh mì with Nigerian-inspired slaw",
       price: 16.99,
-      imageUrl: "/api/placeholder/400/300?text=Tandoori+Plantain+Bánh+Mì"
+      imageUrl: "https://i.ibb.co/HC3rLHH/20250113-003615-0004.png"
     },
     {
       name: "Coconut Palm Jollof Risotto",
       description: "Creamy Italian-style risotto with Nigerian jollof spices and Vietnamese coconut notes",
       price: 19.50,
-      imageUrl: "/api/placeholder/400/300?text=Coconut+Palm+Jollof+Risotto"
+      imageUrl: "https://i.ibb.co/2FD4Y29/20250113-003615-0005.png"
     }
   ];
 
@@ -375,7 +375,8 @@ const FusionFiascoWebsite = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
-      <PageBackground overlayOpacity={0.5} imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736744671~exp=1736748271~hmac=763981313efdb302acfc75c5b30b3501e4aed4455f90e56b3dd41b9cd401a6cc&w=996">
+      <PageBackground overlayOpacity={0.5} 
+      imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736744671~exp=1736748271~hmac=763981313efdb302acfc75c5b30b3501e4aed4455f90e56b3dd41b9cd401a6cc&w=996">
       <Header />
       
       <div className="flex">

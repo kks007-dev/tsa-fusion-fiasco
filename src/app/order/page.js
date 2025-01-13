@@ -121,14 +121,16 @@ const OrdersPage = () => {
   
   return (
     <div className="min-h-screen bg-green-50">
-      <PageBackground className="bg-gradient-to-t" imageUrl="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+      <PageBackground className="bg-gradient-to-t" imageUrl="https://images.pexels.com/photos/1660030/pexels-photo-1660030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      overlayOpacity={0.5}
+      >
       <Navbar />
       <div className="max-w-3xl mx-auto py-10">
         
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-green-900">Your Orders</h1>
-            <p className="text-green-700">View and track your orders</p>
+            <h1 className="text-3xl flex-center font-bold text-white">Your Orders</h1>
+            <p className="text-green-600">View and track your orders</p>
           </div>
           <Button 
             variant="outline"

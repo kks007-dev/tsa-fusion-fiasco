@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Truck, Leaf, Trophy, Users } from 'lucide-react';
+import { MapPin, Clock, Truck, Leaf, Trophy, Users, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Navbar from '@/components/ui/Navbar';
 import PageBackground from '@/components/ui/pagebackground';  // Add this import
@@ -10,15 +10,23 @@ const Header = () => {
 };
 
 const AboutPage = () => {
+
+  const resources = [
+    { title: "Created Logo and Animated Food Graphics on Concepts App", link: "https://concepts.app/en/" },
+    { title: "Web Hosting | Vercel", link: "https://vercel.com/" },
+    { title: "Royalty Free Images From Freepik", link: "https://www.freepik.com/" },
+    { title: "Royalty Free Images From Pexels", link: "https://www.pexels.com/" },
+    { title: "Font(s) from DaFont", link: "https://www.dafont.com/celina-diary.font" },
+    { title: "Image Hosting", link: "https://imgbb.com/" }
+  ];
   return (
     <PageBackground 
-      imageUrl="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=1000"
+      imageUrl="https://images.pexels.com/photos/2193600/pexels-photo-2193600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       overlayOpacity={0.7}  // Made slightly darker to ensure text readability
     >
       <div className="min-h-screen">
         <Header />
-        {/* Hero Section */}
-        <div className="bg-green-800/80 text-white py-20"> {/* Added transparency */}
+        <div className="bg-green-800/80 text-white py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-5xl font-bold mb-6">About Fusion Fiasco</h1>
             <p className="text-xl max-w-2xl mx-auto">
@@ -33,7 +41,7 @@ const AboutPage = () => {
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white/90 p-8 rounded-lg shadow-lg"> {/* Added transparency */}
+              <div className="bg-white/90 p-8 rounded-lg shadow-lg">
                 <p className="text-green-700 mb-4">
                   Born from a passion for vegetarian cooking and global flavors, Fusion Fiasco started as a wild experiment in a home kitchen. Today, we're proud to serve the most innovative vegetarian fusion dishes from our fleet of eco-friendly food trucks.
                 </p>
@@ -41,7 +49,7 @@ const AboutPage = () => {
                   Our mission is to prove that vegetarian food can be exciting, satisfying, and packed with flavors that challenge the status quo. Every dish we serve is a carefully crafted fusion of traditional recipes and modern culinary techniques.
                 </p>
               </div>
-              <div className="bg-green-700/90 p-8 rounded-lg text-white"> {/* Added transparency */}
+              <div className="bg-green-700/90 p-8 rounded-lg text-white">
                 <h3 className="text-2xl font-bold mb-4">Our Values</h3>
                 <ul className="space-y-4">
                   <li className="flex items-center">
@@ -85,11 +93,34 @@ const AboutPage = () => {
             </div>
           </div>
 
-          {/* Locations Map */}
-          <div className="bg-white/90 p-8 rounded-lg shadow-lg"> {/* Added transparency */}
-            <h2 className="text-3xl font-bold text-green-900 mb-6">Find Our Food Trucks</h2>
-            <div className="aspect-video bg-green-100 rounded-lg flex items-center justify-center">
-              <p className="text-green-700">Interactive Map Coming Soon</p>
+          {/* Resources Section - Replaced Map section */}
+          <div className="bg-white/90 p-8 rounded-lg shadow-lg">
+            <h2 className="text-3xl font-bold text-green-900 mb-6">Our Resources</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {resources.map((resource, index) => (
+                <Link 
+                  href={resource.link} 
+                  key={index}
+                  className="flex items-center justify-between p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
+                >
+                  <span className="text-green-700 font-medium">{resource.title}</span>
+                  <ExternalLink className="h-5 w-5 text-green-600" />
+                </Link>
+              ))}
+            </div>
+            <div className="mt-8 flex justify-center gap-4">
+              <Link 
+                href="/copyright"
+                className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors"
+              >
+                Copyright Checklist
+              </Link>
+              <Link 
+                href="/work-log"
+                className="px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Work Log
+              </Link>
             </div>
           </div>
         </div>
