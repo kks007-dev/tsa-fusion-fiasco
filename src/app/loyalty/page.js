@@ -13,10 +13,8 @@ import { QRCodeCanvas } from 'qrcode.react';
 // import { useAuth } from '@/contexts/auth-context';
 
 const LoyaltyDashboard = () => {
-  // TODO: Replace with actual auth integration
-  // const { user, isAuthenticated } = useAuth();
   const isAuthenticated = true; // Temporary mock
-  const mockUser = {
+  const [userState, setUserState] = useState({
     points: 2750,
     tier: "Gold",
     nextTier: "Platinum",
@@ -26,9 +24,19 @@ const LoyaltyDashboard = () => {
       { date: "2024-01-05", description: "Referral Bonus", points: 500 },
       { date: "2023-12-28", description: "Special Event", points: 300 },
     ],
-  };
+  });
 
   const [activeTab, setActiveTab] = useState('points');
+  const [showQR, setShowQR] = useState(false);
+  const [qrValue, setQrValue] = useState('');
+  const [reservations, setReservations] = useState([]);
+  const [votedDishes, setVotedDishes] = useState(new Set());
+  const [redeemedRewards, setRedeemedRewards] = useState(new Set());
+  const [dishes, setDishes] = useState([
+    { id: 1, name: "Nigerian Pho Fusion", votes: 245 },
+    { id: 2, name: "Curry Jollof Risotto", votes: 189 },
+    { id: 3, name: "Tandoori Plantain Roll", votes: 167 },
+  ]);
 
   // Tier thresholds
   const tiers = {
@@ -38,37 +46,103 @@ const LoyaltyDashboard = () => {
     Platinum: 5000
   };
 
-  // TODO: These functions should integrate with backend APIs
-  const [showQR, setShowQR] = useState(false);
-  const [qrValue, setQrValue] = useState('');
-  const [reservations, setReservations] = useState([]);
+  // TODO: These functions should integrate with backend API
 
   const generateQRCode = () => {
-    // Generate a unique code combining user ID and timestamp
-    const uniqueCode = `FUSION-${mockUser.points}-${Date.now()}`;
+    const uniqueCode = `FUSION-${userState.points}-${Date.now()}`;
     setQrValue(uniqueCode);
     setShowQR(true);
   };
 
-  const shareReferral = (platform) => {
-    // Implementation for social sharing
-    console.log(`Share referral on ${platform}`);
+  const shareReferral = async (platform) => {
+    try {
+      // Mock API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const referralCode = 'FUSION2024';
+      const shareText = `Join me at Fusion Restaurant! Use my referral code: ${referralCode}`;
+      
+      switch (platform) {
+        case 'Email':
+          window.location.href = `mailto:?subject=Join%20me%20at%20Fusion%20Restaurant&body=${encodeURIComponent(shareText)}`;
+          break;
+        case 'WhatsApp':
+          window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+          break;
+        case 'Facebook':
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(shareText)}`, '_blank');
+          break;
+      }
+    } catch (error) {
+      console.error('Error sharing referral:', error);
+    }
   };
 
-  const voteDish = (dishId) => {
-    // Implementation for voting system
-    console.log(`Vote for dish ${dishId}`);
+
+  const voteDish = async (dishId) => {
+    if (votedDishes.has(dishId)) return;
+
+    try {
+      // Mock API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      setDishes(dishes.map(dish => 
+        dish.id === dishId 
+          ? { ...dish, votes: dish.votes + 1 }
+          : dish
+      ));
+      
+      setVotedDishes(new Set([...votedDishes, dishId]));
+      
+      // Add voting points to user's account
+      setUserState(prev => ({
+        ...prev,
+        points: prev.points + 50,
+        history: [{
+          date: new Date().toISOString().split('T')[0],
+          description: "Dish Vote Bonus",
+          points: 50
+        }, ...prev.history]
+      }));
+    } catch (error) {
+      console.error('Error voting for dish:', error);
+    }
   };
 
-  const reserveSpot = (event) => {
-    // Add to reservations
-    setReservations([...reservations, event]);
+  const redeemReward = async (reward) => {
+    if (userState.points < reward.points) return;
     
-    // You would typically make an API call here
-    console.log(`Reserved spot for ${event.name}`);
-    
-    // Disable the button after reservation
-    return true;
+    try {
+      // Mock API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      setRedeemedRewards(new Set([...redeemedRewards, reward.name]));
+      
+      setUserState(prev => ({
+        ...prev,
+        points: prev.points - reward.points,
+        history: [{
+          date: new Date().toISOString().split('T')[0],
+          description: `Redeemed: ${reward.name}`,
+          points: -reward.points
+        }, ...prev.history]
+      }));
+    } catch (error) {
+      console.error('Error redeeming reward:', error);
+    }
+  };
+
+  const reserveSpot = async (event) => {
+    try {
+      // Mock API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      setReservations([...reservations, event]);
+      return true;
+    } catch (error) {
+      console.error('Error reserving spot:', error);
+      return false;
+    }
   };
 
   return (
@@ -79,7 +153,6 @@ const LoyaltyDashboard = () => {
           <h1 className="text-4xl font-bold text-green-900 mb-8">Loyalty Program</h1>
         
         {!isAuthenticated ? (
-          // TODO: Replace with actual login component
           <Card>
             <CardContent className="p-6">
               <p className="text-center text-lg">Please log in to access your loyalty dashboard</p>
@@ -110,14 +183,14 @@ const LoyaltyDashboard = () => {
                   <CardContent>
                     <div className="space-y-4">
                       <div>
-                        <p className="text-2xl font-bold text-green-900">{mockUser.tier} Member</p>
-                        <p className="text-green-600">{mockUser.points} Points</p>
+                        <p className="text-2xl font-bold text-green-900">{userState.tier} Member</p>
+                        <p className="text-green-600">{userState.points} Points</p>
                       </div>
                       <div>
                         <p className="text-sm text-green-600 mb-2">
-                          {mockUser.pointsToNext} points until {mockUser.nextTier}
+                          {userState.pointsToNext} points until {userState.nextTier}
                         </p>
-                        <Progress value={(mockUser.points % 2500) / 25} className="h-2" />
+                        <Progress value={(userState.points % 2500) / 25} className="h-2" />
                       </div>
                     </div>
                   </CardContent>
@@ -129,13 +202,15 @@ const LoyaltyDashboard = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {mockUser.history.map((item, index) => (
+                      {userState.history.map((item, index) => (
                         <div key={index} className="flex justify-between items-center border-b pb-2">
                           <div>
                             <p className="font-medium">{item.description}</p>
                             <p className="text-sm text-green-600">{item.date}</p>
                           </div>
-                          <p className="font-bold text-green-700">+{item.points}</p>
+                          <p className={`font-bold ${item.points > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                            {item.points > 0 ? '+' : ''}{item.points}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -143,6 +218,7 @@ const LoyaltyDashboard = () => {
                 </Card>
               </div>
             </TabsContent>
+
 
             {/* Rewards Tab */}
             <TabsContent value="rewards">
@@ -165,8 +241,11 @@ const LoyaltyDashboard = () => {
                           <p className="font-medium">{reward.name}</p>
                           <p className="text-sm text-green-600">{reward.points} points required</p>
                         </div>
-                        <Button disabled={mockUser.points < reward.points}>
-                          Redeem
+                        <Button 
+                          disabled={userState.points < reward.points || redeemedRewards.has(reward.name)}
+                          onClick={() => redeemReward(reward)}
+                        >
+                          {redeemedRewards.has(reward.name) ? 'Redeemed' : 'Redeem'}
                         </Button>
                       </div>
                     ))}
@@ -215,18 +294,17 @@ const LoyaltyDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
-                    {[
-                      { id: 1, name: "Nigerian Pho Fusion", votes: 245 },
-                      { id: 2, name: "Curry Jollof Risotto", votes: 189 },
-                      { id: 3, name: "Tandoori Plantain Roll", votes: 167 },
-                    ].map((dish) => (
+                    {dishes.map((dish) => (
                       <div key={dish.id} className="flex justify-between items-center p-4 border rounded-lg">
                         <div>
                           <p className="font-medium">{dish.name}</p>
                           <p className="text-sm text-green-600">{dish.votes} votes</p>
                         </div>
-                        <Button onClick={() => voteDish(dish.id)}>
-                          Vote
+                        <Button 
+                          onClick={() => voteDish(dish.id)}
+                          disabled={votedDishes.has(dish.id)}
+                        >
+                          {votedDishes.has(dish.id) ? 'Voted' : 'Vote'}
                         </Button>
                       </div>
                     ))}
