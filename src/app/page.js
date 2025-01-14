@@ -375,7 +375,7 @@ const FusionFiascoWebsite = () => {
 
   return (
     <div className="min-h-screen bg-green-50">
-      <PageBackground overlayOpacity={0.5} imageUrl="https://img.freepik.com/free-photo/mid-shot-man-reading-food-truck-menu_23-2148757258.jpg?t=st=1736801957~exp=1736805557~hmac=5188f65dfa3b35554ff5fb07fd639028d7911ce2195b48ee98225186ca487029&w=1800">
+      <PageBackground overlayOpacity={0.5} imageUrl="https://i.ibb.co/857wSHC/mid-shot-man-reading-food-truck-menu-23-2148757258.jpg">
       <Header />
       
       <div className="flex">
