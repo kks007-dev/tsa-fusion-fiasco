@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import PageBackground from "@/components/ui/pagebackground";
+import toast from "react-hot-toast";
 
 // Updated Header Component
 const Header = () => {
@@ -65,10 +66,13 @@ const HomePage = () => {
     
           const result = await res.json();
           if (res.ok) {
-            alert("Sign up successful! Please log in.");
+            toast.success("Sign up successful! Please log in.");
+            toast.success("Sign up successful! Please log in.");
             toggleForm();
+
           } else {
-            alert(result.message || "Something went wrong.");
+            toast.error("Something went wrong.")
+           // alert(result.message || "Something went wrong.");
           }
         } catch (error) {
           console.error(error);
@@ -97,7 +101,9 @@ const HomePage = () => {
     
           const result = await res.json();
           if (res.ok) {
-            alert("Login successful!");
+            toast.success("Login successful!")
+
+            //alert("Login successful!");
             // Store the token in local storage or a cookie
             localStorage.setItem("token", result.token);
             localStorage.setItem("user", JSON.stringify(result.user));
@@ -112,7 +118,7 @@ const HomePage = () => {
           }
         } catch (error) {
           console.error(error);
-          alert("Failed to log in. Please try again.");
+          toast.error("Failed to log in. Please try again.")
         }
       };
 
