@@ -100,9 +100,12 @@ const HomePage = () => {
             alert("Login successful!");
             // Store the token in local storage or a cookie
             localStorage.setItem("token", result.token);
-            localStorage.setItem("user", result.user);
+            localStorage.setItem("user", JSON.stringify(result.user));
             localStorage.setItem("email", result.user.email);
             localStorage.setItem("name", result.user.name);
+            if (result.user.cart.length >= 1){
+              localStorage.setItem("cart", JSON.stringify(result.user.cart));
+            }
             window.location.href = '/';
           } else {
             alert(result.message || "Invalid credentials.");

@@ -28,9 +28,8 @@ export async function POST(req) {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: '1h',
     });
-
     return new Response(
-      JSON.stringify({ token, user: { id: user._id, name: user.name, email: user.email } }),
+      JSON.stringify({ token, user: { id: user._id, name: user.name, email: user.email, cart: user.cart } }),
       { status: 200 }
     );
   } catch (error) {

@@ -5,8 +5,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cart: { 
-    type: [[mongoose.Schema.Types.Mixed]],  // A 2D array with mixed types
-    default: [['item 1', 100, true], ['item 2', 200, false]]
+    type: Array,  // A 2D array with mixed types
+    // default: [{name: 'Saigon Suya Tacos', price: 16.5, quantity: 2}, {name: 'Lagos Curry Bomb', price: 18.99, quantity: 1}]
   }
 });
 

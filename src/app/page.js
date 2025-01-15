@@ -156,6 +156,8 @@ const MenuItemCard = ({ name, description, price, imageUrl, onAddToCart }) => {
 
 // Menu Section Component
 const MenuSection = ({ onAddToCart }) => {
+
+
   const menuItems = [
     {
       name: "Lagos Curry Bomb",
@@ -344,7 +346,39 @@ const Footer = () => {
 
 // Main App Component
 const FusionFiascoWebsite = () => {
-  const [cartItems, setCartItems] = useState([]);
+  let cart;
+  
+  if (global?.window !== undefined){
+    cart = JSON.parse(localStorage.getItem("cart"));
+  };
+  const freshcart = cart || [];
+  // cart is loaded based on local storage
+  const [cartItems, setCartItems] = useState(freshcart);
+
+// function to update the client cart to both local storage and cloud if user is signed in
+  const updateUser = async (newcart) => {
+    localStorage.setItem("cart", JSON.stringify(newcart));
+    if (localStorage.getItem("email")){
+      try {
+        const res = await fetch("/api/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({email: localStorage.getItem("email"), cart: newcart}),
+        });
+        const result = await res.json();
+            if (res.ok) {
+              console.log('cart updated');
+            } else {
+              console.log(result.message || "Something went wrong.");
+            }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    
+  }
 
   const handleAddToCart = (item) => {
     const existingItemIndex = cartItems.findIndex(cartItem => cartItem.name === item.name);
@@ -353,6 +387,7 @@ const FusionFiascoWebsite = () => {
       const updatedCart = [...cartItems];
       updatedCart[existingItemIndex].quantity += 1;
       setCartItems(updatedCart);
+      updateUser(updatedCart);
     } else {
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
@@ -361,6 +396,7 @@ const FusionFiascoWebsite = () => {
   const handleRemoveItem = (index) => {
     const updatedCart = cartItems.filter((_, i) => i !== index);
     setCartItems(updatedCart);
+    updateUser(updatedCart);
   };
 
   const handleUpdateQuantity = (index, newQuantity) => {
@@ -370,8 +406,11 @@ const FusionFiascoWebsite = () => {
       const updatedCart = [...cartItems];
       updatedCart[index].quantity = newQuantity;
       setCartItems(updatedCart);
+      updateUser(updatedCart);
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-green-50">
