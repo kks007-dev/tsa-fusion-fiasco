@@ -67,7 +67,6 @@ const HomePage = () => {
           const result = await res.json();
           if (res.ok) {
             toast.success("Sign up successful! Please log in.");
-            toast.success("Sign up successful! Please log in.");
             toggleForm();
 
           } else {
@@ -89,7 +88,7 @@ const HomePage = () => {
           email: email,
           password: password,
         };
-    
+      
         try {
           const res = await fetch("/api/login", {
             method: "POST",
@@ -98,29 +97,33 @@ const HomePage = () => {
             },
             body: JSON.stringify(data),
           });
-    
+      
           const result = await res.json();
           if (res.ok) {
-            toast.success("Login successful!")
-
-            //alert("Login successful!");
-            // Store the token in local storage or a cookie
+            toast.success("Login successful!");
+      
+            // Store the token and user info in local storage or cookies
             localStorage.setItem("token", result.token);
             localStorage.setItem("user", JSON.stringify(result.user));
             localStorage.setItem("email", result.user.email);
             localStorage.setItem("name", result.user.name);
-            if (result.user.cart.length >= 1){
+            if (result.user.cart.length >= 1) {
               localStorage.setItem("cart", JSON.stringify(result.user.cart));
             }
-            window.location.href = '/';
+      
+            // Delay the redirect to allow the toast to show
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1500); // 2-second delay to let the toast display
           } else {
-            alert(result.message || "Invalid credentials.");
+            toast.error(result.message || "Invalid credentials.");
           }
         } catch (error) {
           console.error(error);
-          toast.error("Failed to log in. Please try again.")
+          toast.error("Failed to log in. Please try again.");
         }
       };
+      
 
     return (
       <div>
