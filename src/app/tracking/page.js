@@ -133,9 +133,7 @@ const FoodTruckPage = () => {
         <h3 class="font-bold text-lg mb-2">${location.name}</h3>
         <p class="text-gray-600 mb-2">${location.description}</p>
         <p class="font-medium">
-          <span class="${isOpen ? "text-green-600" : "text-red-600"}">
-            ${isOpen ? "● Open Now" : "○ Closed"}
-          </span>
+     
         </p>
       </div>
     `;
