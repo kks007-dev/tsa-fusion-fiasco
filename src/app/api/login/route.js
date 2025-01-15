@@ -13,22 +13,14 @@ export async function POST(req) {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return new Response(
-        
-        toast.error("Invalid creditianls"
-        
-        ), {
+      return new Response(JSON.stringify({ message: 'Invalid credentials' }), {
         status: 401,
       });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return new Response(
-        
-        toast.error("Invalid creditianls"
-        
-        ), {
+      return new Response(JSON.stringify({ message: 'Invalid credentials' }), {
         status: 401,
       });
     }
@@ -41,11 +33,7 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    return new Response(
-        
-      toast.error("Invalid creditianls"
-      
-      ), {
+    return new Response(JSON.stringify({ message: 'Server error' }), {
       status: 500,
     });
   }
