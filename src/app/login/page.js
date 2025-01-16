@@ -4,41 +4,19 @@ import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import PageBackground from "@/components/ui/pagebackground";
 import toast from "react-hot-toast";
+import Loader from "@/components/ui/Loader";
 
 // Updated Header Component
 const Header = () => {
   return (
-    // <header className="bg-green-800 text-white py-6">
-    //   <div className="container mx-auto flex justify-between items-center px-4">
-    //     <Link href="/" className="text-3xl font-bold italic  hover:text-green-200">
-    //       Fusion Fiasco
-    //     </Link>
-    //     <nav className="space-x-6">
-    //       <Link href="/menu" className="hover:text-green-200">
-    //         Menu
-    //       </Link>
-    //       <Link href="/tracking" className="hover:text-green-200">
-    //         Tracking
-    //       </Link>
-    //       <Link href="/loyalty" className="hover:text-green-200">
-    //         Loyalty
-    //       </Link>
-    //       <Link href="/community" className="hover:text-green-200">
-    //         Community
-    //       </Link>
-    //       <Link href="/about" className="hover:text-green-200">
-    //         About
-    //       </Link>
-    //     </nav>
-    //   </div>
-    // </header>
-    // To allow for easy navbar changes ( delete comment in future updates)
     <Navbar/>
   );
 };
 
 const HomePage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
+    const [isLoading, loadSwitch] = useState(false);
+
   
     const toggleForm = () => {
       setIsSignUp(!isSignUp);
@@ -46,6 +24,7 @@ const HomePage = () => {
 
     const handleSignUp = async (event) => {
         event.preventDefault();
+        loadSwitch(true);
         const name = await document.getElementById('name').value;
         const rawemail = document.getElementById('email').value;
         const email = rawemail.toLowerCase();
@@ -70,17 +49,20 @@ const HomePage = () => {
             toggleForm();
 
           } else {
-            toast.error("Something went wrong.")
-           // alert(result.message || "Something went wrong.");
+            toast.error(result.message || "Something went wrong.")
+           // alert("Something went wrong.");
           }
         } catch (error) {
           console.error(error);
           alert("Failed to sign up. Please try again.");
+        }finally{
+          loadSwitch(false);
         }
       };
     
       const handleLogIn = async (event) => {
         event.preventDefault();
+        loadSwitch(true);
         const rawemail = document.getElementById('email').value;
         const email = rawemail.toLowerCase();
         const password = document.getElementById('password').value;
@@ -99,6 +81,7 @@ const HomePage = () => {
           });
       
           const result = await res.json();
+          
           if (res.ok) {
             toast.success("Login successful!");
       
@@ -121,6 +104,8 @@ const HomePage = () => {
         } catch (error) {
           console.error(error);
           toast.error("Failed to log in. Please try again.");
+        }finally{
+          loadSwitch(false);
         }
       };
       
@@ -198,7 +183,7 @@ const HomePage = () => {
                 </div>
               )}
               <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300">
-                {isSignUp ? "Sign Up" : "Login"}
+              {isSignUp ? "Sign Up" : "Login"}
               </button>
             </form>
             <p className="text-center text-sm text-gray-600 mt-4">
@@ -210,6 +195,10 @@ const HomePage = () => {
                 {isSignUp ? "Login" : "Sign Up"}
               </button>
             </p>
+            
+            <div id="loadspace" className="justify-items-center">
+                {isLoading? <Loader /> : ''}
+              </div>
           </div>
         </main>
         <Footer />
